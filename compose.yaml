@@ -1,0 +1,11 @@
+services:
+  builder:
+    build:
+      context: .
+      dockerfile_inline: |
+        FROM ubuntu:latest
+        RUN apt-get update && apt-get install -y cloud-image-utils
+    command: cloud-localds user-data.img user-data
+    volumes:
+      - .:/work
+    working_dir: /work
