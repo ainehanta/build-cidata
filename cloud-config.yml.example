@@ -1,0 +1,11 @@
+#cloud-config
+password: ubuntu
+chpasswd: { expire: False }
+keyboard:
+  layout: jp
+package_reboot_if_required: true
+package_update: true
+package_upgrade: true
+packages:
+  - apt:
+      - "ubuntu-desktop-minimal"
