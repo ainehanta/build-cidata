@@ -3,9 +3,22 @@ password: ubuntu
 chpasswd: { expire: False }
 keyboard:
   layout: jp
+timezone: Asia/Tokyo
 package_reboot_if_required: true
 package_update: true
 package_upgrade: true
 packages:
-  - apt:
-      - "ubuntu-desktop-minimal"
+  - "ubuntu-desktop-minimal"
+final_message: |
+  cloud-init has finished
+  version: $version
+  timestamp: $timestamp
+  datasource: $datasource
+  uptime: $uptime
+write_files:
+  - content: |
+      network:
+        version: 2
+        renderer: NetworkManager
+    path: /etc/netplan/99-network-manager.yaml
+    defer: true
