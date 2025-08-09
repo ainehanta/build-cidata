@@ -1,14 +1,20 @@
 #cloud-config
 password: ubuntu
-chpasswd: { expire: False }
+chpasswd:
+  expire: false
+ssh_pwauth: true
 keyboard:
   layout: jp
 timezone: Asia/Tokyo
-package_reboot_if_required: true
 package_update: true
 package_upgrade: true
 packages:
   - "ubuntu-desktop-minimal"
+  - "docker.io"
+  - "docker-compose-v2"
+  - "docker-buildx"
+  - "build-essential"
+
 final_message: |
   cloud-init has finished
   version: $version
@@ -22,3 +28,5 @@ write_files:
         renderer: NetworkManager
     path: /etc/netplan/99-network-manager.yaml
     defer: true
+runcmd:
+  - usermod -aG docker ubuntu
